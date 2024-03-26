@@ -10,23 +10,36 @@ class MoodAnalyserTest {
     }
 
     @Test
-    void returnSad() {
+    void returnSad() throws MoodAnalysisException {
         MoodAnalyser mood_analyser = new MoodAnalyser("I am in sad mood");
         String result = mood_analyser.analyseMood();
         Assertions.assertEquals("SAD", result);
     }
 
     @Test
-    void returnHappy() {
+    void returnHappy() throws MoodAnalysisException {
         MoodAnalyser mood_analyser = new MoodAnalyser("I am in any mood");
         String result = mood_analyser.analyseMood();
         Assertions.assertEquals("HAPPY", result);
     }
 
     @Test
-    public void givenNullMood_ShouldReturnHappy() {
+    public void givenInvalidMood_ShouldThrowException() throws MoodAnalysisException {
         MoodAnalyser moodAnalyser = new MoodAnalyser(null);
-        String mood = moodAnalyser.analyseMood();
-        assertEquals("INVALID", mood);
+        try {
+            moodAnalyser.analyseMood();
+        } catch (MoodAnalysisException e) {
+            assertEquals("Mood is null or empty.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenNullMood_shouldThrowMoodAnalysisException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+        try {
+            moodAnalyser.analyseMood();
+        } catch (MoodAnalysisException e) {
+            assertEquals("Mood is null or empty.", e.getMessage());
+        }
     }
 }
