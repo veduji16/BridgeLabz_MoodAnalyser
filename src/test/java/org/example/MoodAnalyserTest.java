@@ -42,4 +42,15 @@ class MoodAnalyserTest {
             assertEquals("Mood is null or empty.", e.getMessage());
         }
     }
+
+    @Test
+    public void givenEmptyMood_shouldThrowMoodAnalysisException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("");
+        try {
+            moodAnalyser.analyseMood();
+        } catch (MoodAnalysisException e) {
+            assertEquals("Mood is null or empty.", e.getMessage());
+        }
+    }
+
 }
